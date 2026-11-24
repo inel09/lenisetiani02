@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Profile - TKJ SMK Banjarasri</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Logika Navigasi Tab Interaktif Berbasis CSS Radio Button */
+        .tab-content {
+            display: none;
+            animation: fadeSlide 0.25s ease-out forwards;
+        }
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #tab-beranda:checked ~ .container-all #content-beranda,
+        #tab-panduan:checked ~ .container-all #content-panduan,
+        #tab-praktik:checked ~ .container-all #content-praktik,
+        #tab-materi:checked ~ .container-all #content-materi {
+            display: block;
+        }
+
+        /* Gaya Tombol Tab Aktif */
+        #tab-beranda:checked ~ .container-all label[for="tab-beranda"],
+        #tab-panduan:checked ~ .container-all label[for="tab-panduan"],
+        #tab-praktik:checked ~ .container-all label[for="tab-praktik"],
+        #tab-materi:checked ~ .container-all label[for="tab-materi"] {
+            background-color: #0284c7;
+            color: #ffffff;
+            box-shadow: 0 4px 10px -1px rgba(2, 132, 199, 0.4);
+        }
+
+        /* Visualisasi Warna Kabel UTP Straight T568B */
+        .wire-po { background: repeating-linear-gradient(45deg, #ffffff, #ffffff 3px, #f97316 3px, #f97316 6px); }
+        .wire-o  { background: #f97316; }
+        .wire-ph { background: repeating-linear-gradient(45deg, #ffffff, #ffffff 3px, #22c55e 3px, #22c55e 6px); }
+        .wire-b  { background: #2563eb; }
+        .wire-pb { background: repeating-linear-gradient(45deg, #ffffff, #ffffff 3px, #2563eb 3px, #2563eb 6px); }
+        .wire-h  { background: #22c55e; }
+        .wire-pc { background: repeating-linear-gradient(45deg, #ffffff, #ffffff 3px, #78350f 3px, #78350f 6px); }
+        .wire-c  { background: #78350f; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-2 sm:p-4 font-sans antialiased selection:bg-sky-500 selection:text-white">
+
+    <!-- Kontainer Utama Aplikasi (Mobile-First Card) -->
+    <div class="w-full max-w-md bg-slate-900 min-h-[92vh] sm:min-h-[680px] rounded-2xl shadow-2xl border border-slate-800 flex flex-col overflow-hidden">
+        
+        <!-- Radio State Controller untuk 4 Halaman -->
+        <input type="radio" name="tabs" id="tab-beranda" checked class="hidden">
+        <input type="radio" name="tabs" id="tab-panduan" class="hidden">
+        <input type="radio" name="tabs" id="tab-praktik" class="hidden">
+        <input type="radio" name="tabs" id="tab-materi" class="hidden">
+
+        <div class="container-all flex flex-col flex-1">
+            
+            <!-- HEADER & NAVIGASI -->
+            <header class="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 p-3.5 sticky top-0 z-50">
+                <div class="flex items-center justify-between mb-3 px-0.5">
+                    <div class="flex items-center space-x-2.5">
+                        <!-- Ikon Topologi Jaringan -->
+                        <div class="w-9 h-9 bg-gradient-to-br from-sky-400 to-blue-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-sky-500/20 shrink-0">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="2" width="6" height="5" rx="1"></rect>
+                                <rect x="2" y="17" width="6" height="5" rx="1"></rect>
+                                <rect x="16" y="17" width="6" height="5" rx="1"></rect>
+                                <path d="M12 7v5"></path>
+                                <path d="M5 17v-3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-xs sm:text-sm font-extrabold text-sky-400 tracking-wide leading-tight">SMK BANJARASRI</h1>
+                            <p class="text-[11px] text-slate-300 font-medium">Teknik Komputer &amp; Jaringan</p>
+                        </div>
+                    </div>
+                    <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-800 text-sky-400 border border-slate-700">
+                        Profil TKJ
+                    </span>
+                </div>
+
+                <!-- 4 Tab Navigasi Interaktif -->
+                <nav class="grid grid-cols-4 gap-1.5 bg-slate-800/90 p-1.5 rounded-xl text-xs font-semibold" aria-label="Menu Utama">
+                    <label for="tab-beranda" class="cursor-pointer text-center py-2 rounded-lg text-slate-300 hover:text-white transition-all select-none">Beranda</label>
+                    <label for="tab-panduan" class="cursor-pointer text-center py-2 rounded-lg text-slate-300 hover:text-white transition-all select-none">Panduan</label>
+                    <label for="tab-praktik" class="cursor-pointer text-center py-2 rounded-lg text-slate-300 hover:text-white transition-all select-none">Praktik</label>
+                    <label for="tab-materi" class="cursor-pointer text-center py-2 rounded-lg text-slate-300 hover:text-white transition-all select-none">Materi</label>
+                </nav>
+            </header>
+
+            <!-- AREA KONTEN UTAMA -->
+            <main class="p-3.5 flex-1 overflow-y-auto space-y-3.5">
+
+                <!-- =========================================================
+                     HALAMAN 1: BERANDA & FASILITAS LAB
+                     ========================================================= -->
+                <section id="content-beranda" class="tab-content space-y-3.5">
+                    <!-- Hero Card -->
+                    <div class="bg-gradient-to-br from-slate-800 via-slate-900 to-indigo-950 border border-slate-700/80 p-5 rounded-2xl shadow-xl relative overflow-hidden">
+                        <div class="absolute -top-10 -right-10 w-36 h-36 bg-sky-500/20 rounded-full blur-2xl pointer-events-none"></div>
+                        <span class="inline-block px-3 py-1 bg-sky-500/20 border border-sky-400/30 text-sky-300 text-[10px] font-bold rounded-full mb-2.5">
+                            Selamat Datang Adik-Adik Kelas!
+                        </span>
+                        <h2 class="text-xl sm:text-2xl font-black text-white leading-tight mb-2.5">
+                            Ayo Pelajari Materi TKJ-nya di Sini!
+                        </h2>
+                        <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                            Temukan keseruan dunia teknologi informasi, jaringan internet, perakitan komputer, hingga pembuatan website bersama Jurusan Teknik Komputer dan Jaringan (TKJ) SMK Banjarasri. Belajar seru, mudah dipahami, dan langsung praktik!
+                        </p>
+                        <label for="tab-panduan" class="inline-block w-full text-center py-2.5 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-bold rounded-xl text-xs shadow-lg shadow-sky-500/30 cursor-pointer transition-all active:scale-[0.98]">
+                            Mulai Belajar Sekarang →
+                        </label>
+                    </div>
+
+                    <!-- Kartu Fasilitas Lab TKJ -->
+                    <div class="bg-slate-800/70 border border-slate-700/80 p-4 rounded-2xl">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xs font-extrabold text-sky-400 uppercase tracking-wider">Fasilitas Lab TKJ</h3>
+                            <span class="text-[10px] text-slate-400">Nyaman &amp; Siap Pakai</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2.5">
+                            <!-- Fasilitas 1: Komputer -->
+                            <div class="bg-slate-900/90 p-3 rounded-xl border border-slate-700/60 text-center flex flex-col items-center">
+                                <div class="w-9 h-9 rounded-lg bg-blue-500/15 text-blue-400 flex items-center justify-center mb-2">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                                </div>
+                                <h4 class="text-xs font-bold text-white">Komputer</h4>
+                                <p class="text-[10px] text-slate-400 mt-0.5 leading-tight">PC Praktik Siswa</p>
+                            </div>
+                            <!-- Fasilitas 2: Wi-Fi -->
+                            <div class="bg-slate-900/90 p-3 rounded-xl border border-slate-700/60 text-center flex flex-col items-center">
+                                <div class="w-9 h-9 rounded-lg bg-sky-500/15 text-sky-400 flex items-center justify-center mb-2">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+                                </div>
+                                <h4 class="text-xs font-bold text-white">Wi-Fi</h4>
+                                <p class="text-[10px] text-slate-400 mt-0.5 leading-tight">Akses Internet</p>
+                            </div>
+                            <!-- Fasilitas 3: Kipas -->
+                            <div class="bg-slate-900/90 p-3 rounded-xl border border-slate-700/60 text-center flex flex-col items-center">
+                                <div class="w-9 h-9 rounded-lg bg-teal-500/15 text-teal-400 flex items-center justify-center mb-2">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c2-2.96 0-7-1-8 0 3.038-1.773 4.741-3 6-1.226 1.26-2 3.24-2 5a6 6 0 1 0 12 0c0-1.532-1.056-3.94-2-5-1.786 3-2.791 3-4 2z"></path></svg>
+                                </div>
+                                <h4 class="text-xs font-bold text-white">Kipas</h4>
+                                <p class="text-[10px] text-slate-400 mt-0.5 leading-tight">Ruangan Sejuk</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- =========================================================
+                     HALAMAN 2: PANDUAN 5 MATERI INTI
+                     ========================================================= -->
+                <section id="content-panduan" class="tab-content space-y-3">
+                    <div class="bg-slate-800/80 border border-slate-700 p-4 rounded-2xl">
+                        <span class="inline-block px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-400 text-[10px] font-bold uppercase tracking-wider mb-1">Peta Belajar</span>
+                        <h2 class="text-base font-extrabold text-white mb-1">5 Pilar Panduan Materi TKJ</h2>
+                        <p class="text-[11px] text-slate-400 mb-3.5">Daftar materi inti yang akan kamu pelajari di jurusan Teknik Komputer dan Jaringan.</p>
+                        
+                        <div class="space-y-2.5">
+                            <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700/60 flex items-center space-x-3">
+                                <span class="w-7 h-7 bg-sky-500/20 text-sky-400 font-extrabold text-xs rounded-lg flex items-center justify-center shrink-0">1</span>
+                                <div>
+                                    <h3 class="text-xs font-bold text-slate-100">Tentang MikroTik</h3>
+                                    <p class="text-[10px] text-slate-400">Router &amp; Manajemen Bandwidth Jaringan</p>
+                                </div>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700/60 flex items-center space-x-3">
+                                <span class="w-7 h-7 bg-sky-500/20 text-sky-400 font-extrabold text-xs rounded-lg flex items-center justify-center shrink-0">2</span>
+                                <div>
+                                    <h3 class="text-xs font-bold text-slate-100">Konfigurasi IP Address</h3>
+                                    <p class="text-[10px] text-slate-400">Pengalamatan Perangkat IPv4 &amp; IPv6</p>
+                                </div>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700/60 flex items-center space-x-3">
+                                <span class="w-7 h-7 bg-sky-500/20 text-sky-400 font-extrabold text-xs rounded-lg flex items-center justify-center shrink-0">3</span>
+                                <div>
+                                    <h3 class="text-xs font-bold text-slate-100">Instalasi Windows &amp; Linux</h3>
+                                    <p class="text-[10px] text-slate-400">Pemasangan OS &amp; Konfigurasi Dasar</p>
+                                </div>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700/60 flex items-center space-x-3">
+                                <span class="w-7 h-7 bg-sky-500/20 text-sky-400 font-extrabold text-xs rounded-lg flex items-center justify-center shrink-0">4</span>
+                                <div>
+                                    <h3 class="text-xs font-bold text-slate-100">Kabel LAN (Local Area Network)</h3>
+                                    <p class="text-[10px] text-slate-400">Crimping UTP &amp; Pengujian Koneksi</p>
+                                </div>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700/60 flex items-center space-x-3">
+                                <span class="w-7 h-7 bg-sky-500/20 text-sky-400 font-extrabold text-xs rounded-lg flex items-center justify-center shrink-0">5</span>
+                                <div>
+                                    <h3 class="text-xs font-bold text-slate-100">Website Dasar</h3>
+                                    <p class="text-[10px] text-slate-400">Struktur HTML, CSS &amp; Publikasi Web</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- =========================================================
+                     HALAMAN 3: PRAKTIK SIMPEL KELIMA MATERI
+                     ========================================================= -->
+                <section id="content-praktik" class="tab-content space-y-3">
+                    <div class="bg-slate-800/80 border border-slate-700 p-4 rounded-2xl">
+                        <span class="inline-block px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-1">Hands-On Lab</span>
+                        <h2 class="text-base font-extrabold text-white mb-1">Praktik Simpel Kelima Materi</h2>
+                        <p class="text-[11px] text-slate-400 mb-3.5">Langkah dasar praktik yang bisa langsung dicoba di Lab TKJ.</p>
+                        
+                        <div class="space-y-3 text-xs">
+                            <!-- Praktik 1: MikroTik -->
+                            <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-700/80">
+                                <h3 class="font-bold text-sky-400 mb-1.5">1. Praktik MikroTik (Dasar)</h3>
+                                <p class="text-slate-300 text-[11px] leading-relaxed">
+                                    Hubungkan ke PC lewat port 2 dengan kabel LAN. Buka aplikasi <strong class="text-white">WinBox</strong>, login via MAC Address, lalu ubah nama identitas router melalui menu <code class="bg-slate-800 px-1.5 py-0.5 rounded text-sky-300 font-mono text-[10px]">System &gt; Identity</code>.
+                                </p>
+                            </div>
+
+                            <!-- Praktik 2: Konfigurasi IP -->
+                            <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-700/80">
+                                <h3 class="font-bold text-sky-400 mb-1.5">2. Praktik Konfigurasi IP</h3>
+                                <p class="text-slate-300 text-[11px] leading-relaxed">
+                                    Masuk ke <span class="text-slate-200 font-medium">Control Panel &gt; Network Connections</span>. Klik kanan Ethernet &gt; Properties &gt; IPv4. Masukkan IP <code class="bg-slate-800 px-1.5 py-0.5 rounded text-sky-300 font-mono text-[10px]">192.168.1.10</code> dan uji lewat CMD dengan mengetik <code class="bg-slate-800 px-1.5 py-0.5 rounded text-sky-300 font-mono text-[10px]">ping 192.168.1.1</code>.
+                                </p>
+                            </div>
+
+                            <!-- Praktik 3: Instalasi Windows & Linux -->
+                            <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-700/80">
+                                <h3 class="font-bold text-sky-400 mb-1.5">3. Praktik Instalasi Windows &amp; Linux</h3>
+                                <p class="text-slate-300 text-[11px] leading-relaxed">
+                                    Gunakan Flashdisk Bootable installer. Atur urutan booting utama dari USB di menu BIOS/UEFI, lalu ikuti instruksi instalasi di layar hingga sistem operasi siap dipakai.
+                                </p>
+                            </div>
+
+                            <!-- Praktik 4: Kabel LAN (Crimping) + Visualisasi Warna -->
+                            <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-700/80 space-y-2.5">
+                                <div>
+                                    <h3 class="font-bold text-sky-400 mb-1">4. Praktik Kabel LAN (Crimping)</h3>
+                                    <p class="text-slate-300 text-[11px] leading-relaxed">
+                                        Susun kabel UTP standar <strong class="text-white">Straight</strong> (Pin 1–8) ke konektor RJ-45, lalu jepit kuat menggunakan tang crimping dan uji dengan LAN Tester.
+                                    </p>
+                                </div>
+                                <!-- Visualisasi Pin 1-8 -->
+                                <div class="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800">
+                                    <div class="text-[10px] font-bold text-slate-400 mb-2 text-center">Urutan Warna Straight (T568B)</div>
+                                    <div class="grid grid-cols-4 gap-1.5 text-center">
+                                        <div class="bg-slate-900 p-1.5 rounded-lg border border-slate-800">
+                                            <div class="text-[9px] text-slate-400 font-bold">1</div>
+                                            <div class="w-2.5 h-5 mx-auto rounded wire-po my-1"></div>
+                                            <div class="text-[9px] text-slate-200 font-medium">P.Oranye</div>
+                                        </div>
+                                        <div class="bg-slate-900 p-1.5 rounded-lg border border-slate-800">
+                                            <div class="text-[9px] text-slate-400 font-bold">2</div>
+                                            <div class="w-2.5 h-5 mx-auto rounded wire-o my-1"></div>
+                                            <div class="text-[9px] text-slate-200 font-medium">Oranye</div>
+                                        </div>
+                                        <div class="bg-slate-900 p-1.5 rounded-lg border border-slate-800">
+                                            <div class="text-[9px] text-slate-400 font-bold">3</div>
+                                            <div class="w-2.5 h-5 mx-auto rounded wire-ph my-1"></div>
+                                            <div class="text-[9px] text-slate-200 font-medium">P.Hijau</div>
+                                        </div>
+                                        <div class="bg-slate-900 p-1.5 rounded-lg border border-slate-800">
+                                            <div class="text-[9px] text-slate-400 font-bold">4</div>
+                                            <div class="w-2.5 h-5 mx-auto rounded wire-b my-1"></div>
+                                            <div class="text-[9px] text-slate-200 font-medium">Biru</div>
+                                        </div>
+                                        <div class="bg-slate-900 p-1.5 rounded-lg border border-slate-800">
+                                            <div class="text-[9px] text-slate-400 font-bold">5</div>
+                                            <div class="w-2.5 h-5 mx-auto rounded wire-pb my-1"></div>
+                                            <div class="text-[9px] text-slate-200 font-medium">P.Biru</div>
+                                        </div>
+                                        <div class="bg-slate-900 p-1.5 rounded-lg border border-slate-800">
+                                            <div class="text-[9px] text-slate-400 font-bold">6</div>
+                                            <div class="w-2.5 h-5 mx-auto rounded wire-h my-1"></div>
+                                            <div class="text-[9px] text-slate-200 font-medium">Hijau</div>
+                                        </div>
+                                        <div class="bg-slate-900 p-1.5 rounded-lg border border-slate-800">
+                                            <div class="text-[9px] text-slate-400 font-bold">7</div>
+                                            <div class="w-2.5 h-5 mx-auto rounded wire-pc my-1"></div>
+                                            <div class="text-[9px] text-slate-200 font-medium">P.Cokelat</div>
+                                        </div>
+                                        <div class="bg-slate-900 p-1.5 rounded-lg border border-slate-800">
+                                            <div class="text-[9px] text-slate-400 font-bold">8</div>
+                                            <div class="w-2.5 h-5 mx-auto rounded wire-c my-1"></div>
+                                            <div class="text-[9px] text-slate-200 font-medium">Cokelat</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Praktik 5: Membuat Website -->
+                            <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-700/80 space-y-2">
+                                <h3 class="font-bold text-sky-400">5. Praktik Membuat Website</h3>
+                                <p class="text-slate-300 text-[11px] leading-relaxed">
+                                    Buka Notepad atau VS Code, tulis kode HTML berikut dan simpan dengan nama <code class="bg-slate-800 px-1.5 py-0.5 rounded text-sky-300 font-mono text-[10px]">index.html</code>:
+                                </p>
+                                <div class="bg-slate-950 rounded-xl border border-slate-800 overflow-hidden">
+                                    <div class="bg-slate-800/80 px-3 py-1 text-[10px] font-mono text-slate-400 border-b border-slate-800">
+                                        index.html
+                                    </div>
+                                    <pre class="p-2.5 text-[10px] text-sky-300 overflow-x-auto font-mono leading-relaxed"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Halo Siswa TKJ SMK Banjarasri!&lt;/h1&gt;
+    &lt;p&gt;Belajar jaringan dan web itu seru.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- =========================================================
+                     HALAMAN 4: PENGERTIAN LENGKAP MATERI TKJ
+                     ========================================================= -->
+                <section id="content-materi" class="tab-content space-y-3">
+                    <div class="bg-slate-800/80 border border-slate-700 p-4 rounded-2xl space-y-3 text-xs">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-400 text-[10px] font-bold uppercase tracking-wider mb-1">Konsep &amp; Analogi</span>
+                            <h2 class="text-base font-extrabold text-white">Pengertian Materi TKJ</h2>
+                        </div>
+                        
+                        <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-700/60">
+                            <h3 class="font-bold text-sky-400 mb-1">1. Tentang MikroTik</h3>
+                            <p class="text-slate-300 text-[11px] leading-relaxed">
+                                Perangkat keras dan sistem operasi router yang berfungsi mengatur lalu lintas internet, membagi kecepatan bandwidth, serta mengamankan koneksi jaringan sekolah.
+                            </p>
+                        </div>
+
+                        <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-700/60">
+                            <h3 class="font-bold text-sky-400 mb-1">2. Konfigurasi IP</h3>
+                            <p class="text-slate-300 text-[11px] leading-relaxed">
+                                Alamat identitas unik berupa deretan angka (seperti alamat rumah) agar komputer satu dan lainnya dapat saling mengenali dan mengirim data di dalam jaringan.
+                            </p>
+                        </div>
+
+                        <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-700/60">
+                            <h3 class="font-bold text-sky-400 mb-1">3. Instalasi Windows &amp; Linux</h3>
+                            <p class="text-slate-300 text-[11px] leading-relaxed">
+                                Proses memasang sistem operasi utama (jiwa komputer). Windows ramah untuk penggunaan harian, sedangkan Linux sangat tangguh untuk kebutuhan server jaringan.
+                            </p>
+                        </div>
+
+                        <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-700/60">
+                            <h3 class="font-bold text-sky-400 mb-1">4. Kabel LAN</h3>
+                            <p class="text-slate-300 text-[11px] leading-relaxed">
+                                Jalur fisik berupa kabel UTP yang menghubungkan komputer langsung ke switch atau router agar koneksi data berjalan cepat dan stabil tanpa gangguan sinyal.
+                            </p>
+                        </div>
+
+                        <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-700/60">
+                            <h3 class="font-bold text-sky-400 mb-1">5. Website</h3>
+                            <p class="text-slate-300 text-[11px] leading-relaxed">
+                                Kumpulan halaman informasi digital yang dibangun menggunakan kode HTML dan CSS sehingga dapat diakses siapa saja melalui browser internet.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- FOOTER -->
+            <footer class="bg-slate-900/95 border-t border-slate-800 p-3 text-center text-[10px] text-slate-400">
+                &copy; 2026 Jurusan TKJ — <span class="text-sky-400 font-semibold">SMK Banjarasri</span>
+            </footer>
+
+        </div>
+    </div>
+
+</body>
+</html>
+```
